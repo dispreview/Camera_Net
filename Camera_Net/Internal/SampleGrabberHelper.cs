@@ -354,8 +354,9 @@ namespace Camera_NET
             {
                 m_bWantOneFrame = true;
 
-                // Start waiting
-                if (!m_PictureReady.WaitOne(1000, false))
+                // Start waiting 
+                //increase waiting tme 1000 -> 5000, 
+                if (!m_PictureReady.WaitOne(5000, false))
                 {
                     throw new Exception("Timeout while waiting to get a snapshot");
                 }
@@ -364,7 +365,8 @@ namespace Camera_NET
             {
                 Marshal.FreeCoTaskMem(m_ipBuffer);
                 m_ipBuffer = IntPtr.Zero;
-                throw;
+                return m_ipBuffer;
+                //throw; replace throw to return m_ipBuffer
             }
 
             // Got one
